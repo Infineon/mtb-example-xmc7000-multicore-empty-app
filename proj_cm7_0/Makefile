@@ -7,7 +7,7 @@
 #
 ################################################################################
 # \copyright
-# Copyright 2022, Cypress Semiconductor Corporation (an Infineon company)
+# Copyright 2022-2023, Cypress Semiconductor Corporation (an Infineon company)
 # SPDX-License-Identifier: Apache-2.0
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,10 +27,9 @@
 # Basic Configuration
 ################################################################################
 
-
 # Name of application (used to derive name of final linked file).
-# 
-# If APPNAME is edited, ensure to update or regenerate launch 
+#
+# If APPNAME is edited, ensure to update or regenerate launch
 # configurations for your IDE.
 APPNAME=proj_cm7_0
 
@@ -122,9 +121,9 @@ CY_APP_PATH=
 
 # Relative path to the shared repo location.
 #
-# All .mtb files have the format, <URI>#<COMMIT>#<LOCATION>. If the <LOCATION> field 
-# begins with $$ASSET_REPO$$, then the repo is deposited in the path specified by 
-# the CY_GETLIBS_SHARED_PATH variable. The default location is one directory level 
+# All .mtb files have the format, <URI>#<COMMIT>#<LOCATION>. If the <LOCATION> field
+# begins with $$ASSET_REPO$$, then the repo is deposited in the path specified by
+# the CY_GETLIBS_SHARED_PATH variable. The default location is one directory level
 # above the current app directory.
 # This is used with CY_GETLIBS_SHARED_NAME variable, which specifies the directory name.
 CY_GETLIBS_SHARED_PATH=../..
