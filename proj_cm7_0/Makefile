@@ -23,6 +23,8 @@
 # limitations under the License.
 ################################################################################
 
+include ../common.mk
+
 ################################################################################
 # Basic Configuration
 ################################################################################
@@ -54,7 +56,7 @@ VERBOSE=
 COMPONENTS=
 
 # Like COMPONENTS, but disable optional code that was enabled by default.
-DISABLE_COMPONENTS+=XMC7xDUAL_CM0P_SLEEP
+DISABLE_COMPONENTS=XMC7xDUAL_CM0P_SLEEP XMC7x_CM0P_SLEEP
 
 # Set this application to run at the CM7_0
 CORE=CM7
@@ -101,7 +103,14 @@ LDFLAGS=
 LDLIBS=
 
 # Path to the linker script to use (if empty, use the default linker script).
-LINKER_SCRIPT=
+ifeq ($(TOOLCHAIN),GCC_ARM)
+    LINKER_SCRIPT_EXT:=ld
+else ifeq ($(TOOLCHAIN),ARM)
+    LINKER_SCRIPT_EXT:=sct
+else ifeq ($(TOOLCHAIN),IAR)
+    LINKER_SCRIPT_EXT:=icf
+endif
+LINKER_SCRIPT=$(MTB_TOOLS__TARGET_DIR)/COMPONENT_$(CORE)/TOOLCHAIN_$(TOOLCHAIN)/linker_d.$(LINKER_SCRIPT_EXT)
 
 # Custom pre-build commands to run.
 PREBUILD=
@@ -132,12 +141,13 @@ CY_GETLIBS_SHARED_PATH=../..
 #
 CY_GETLIBS_SHARED_NAME=mtb_shared
 
-# Absolute path to the compiler's "bin" directory.
+# Absolute path to the compiler's "bin" directory. The variable name depends on the
+# toolchain used for the build. Refer to the ModusToolbox user guide to get the correct
+# variable name for the toolchain used in your build.
 #
 # The default depends on the selected TOOLCHAIN (GCC_ARM uses the ModusToolbox
-# IDE provided compiler by default).
-CY_COMPILER_PATH=
+# software provided compiler by default).
+CY_COMPILER_GCC_ARM_DIR=
 
-include ../common.mk
 
 include $(CY_TOOLS_DIR)/make/start.mk
